@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose')
+const{ Schema, model } = require('mongoose')
+const mongoose = require('mongoose')
 
 let CommentSchema = new Schema({
     content: {
