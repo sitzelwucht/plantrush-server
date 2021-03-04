@@ -14,6 +14,8 @@ let PlantSchema = new Schema({
         type: String,
         enum: ['low', 'medium', 'high']
     },
+    description: String,
+    image: String,
     added: {
         type: Date,
         default: Date.now
