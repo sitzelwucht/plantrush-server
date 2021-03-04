@@ -6,7 +6,7 @@ const PlantModel = require('../models/Plant.model')
 
 
 
-router.get('/plants', (req, res) => {
+router.get('/myplants', (req, res) => {
     PlantModel.find()
         .then(plants => {
             res.status(200).json(plants)
@@ -22,8 +22,7 @@ router.get('/plants', (req, res) => {
 
 router.post('/add-plant', (req, res) => {
     const { name, watering, light, description, image } = req.body
-
-    PlantModel.create({ name, description, watering, light, image })
+    PlantModel.create({ name: name, description: description, watering: watering, light: light, image: image })
         .then(response => {
             res.status(200).json(response)
         })
@@ -36,7 +35,7 @@ router.post('/add-plant', (req, res) => {
 })
 
 
-router.get('/plants/:plantId', (req, res) => {
+router.get('/myplants/:plantId', (req, res) => {
 
     PlantModel.findById(req.params.plantId)
     .then(response => {
@@ -51,7 +50,7 @@ router.get('/plants/:plantId', (req, res) => {
 })
 
 
-router.delete('/plants/:id', (req, res) => {
+router.delete('/myplants/:id', (req, res) => {
     PlantModel.findByIdAndDelete(req.params.id)
     .then(response => {
         res.status(200).json(response)
@@ -65,7 +64,7 @@ router.delete('/plants/:id', (req, res) => {
 })
 
 
-router.patch('/plants/:id', (req, res) => {
+router.patch('/myplants/:id', (req, res) => {
     let id = req.params.id
     const { name, watering, light, description, image } = req.body
     PlantModel.findByIdAndUpdate(id, {$set: {name: name, description: description, watering: watering, light: light, image: image}}, {new: true})

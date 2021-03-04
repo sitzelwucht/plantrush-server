@@ -12,6 +12,6 @@ let CommentSchema = new Schema({
     }
 })
 
-let CommentModel = model('plant', CommentSchema)
+let CommentModel = model('comment', CommentSchema)
 
 module.exports = CommentModel

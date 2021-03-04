@@ -27,6 +27,8 @@ const allRoutes = require('./routes');
 app.use('/api', allRoutes);
 const plantRoutes = require('./routes/plant.routes');
 app.use('/api', plantRoutes);
+const postRoutes = require('./routes/post.routes');
+app.use('/api', plantRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
 

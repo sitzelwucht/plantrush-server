@@ -15,12 +15,13 @@ let PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    image: String,
     created: {
         type: Date,
         default: Date.now
     }
 })
 
-let PostModel = model('plant', PostSchema)
+let PostModel = model('post', PostSchema)
 
 module.exports = PostModel

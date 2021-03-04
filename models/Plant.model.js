@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 let PlantSchema = new Schema({
     name: {
         type: String,
-        required: true
     },
     watering: {
         type: String,
