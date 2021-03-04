@@ -13,7 +13,7 @@ router.get('/myposts', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: 'something went wrong when getting plants',
+                error: 'something went wrong when getting posts',
                 message: err
             })
         })
@@ -21,9 +21,9 @@ router.get('/myposts', (req, res) => {
 
 
 router.post('/create-post', (req, res) => {
-    const { title, description, image } = req.body
+    const { title, content, image } = req.body
 
-    PostModel.create({ title: title, description: description, image: image })
+    PostModel.create({ title: title, content: content, image: image })
         .then(response => {
             res.status(200).json(response)
         })

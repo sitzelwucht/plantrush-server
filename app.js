@@ -7,6 +7,9 @@ const app = express();
 
 require('./config')(app);
 
+// let cors = require('cors')
+// app.use(cors())
+
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
 
@@ -28,7 +31,7 @@ app.use('/api', allRoutes);
 const plantRoutes = require('./routes/plant.routes');
 app.use('/api', plantRoutes);
 const postRoutes = require('./routes/post.routes');
-app.use('/api', plantRoutes);
+app.use('/api', postRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
 
