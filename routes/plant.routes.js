@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const PlantModel = require('../models/Plant.model')
-
+const axios = require('axios')
 
 
 
@@ -18,6 +18,16 @@ router.get('/myplants', (req, res) => {
             })
         })
 })
+
+
+router.get('/all-plants', (req, res) => {
+    axios.get(`https://trefle.io/api/v1/plants?token=${process.env.REACT_APP_TREFLE_API_KEY}`)
+    .then(response => {
+        res.status(200).json(response.data)
+    })
+    .catch(err => console.log(err))
+})
+
 
 
 router.post('/add-plant', (req, res) => {
