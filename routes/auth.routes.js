@@ -7,7 +7,7 @@ const UserModel = require('../models/User.model');
 
 router.post('/signup', (req, res) => {
     const { email, password } = req.body
-    console.log(req.body)
+    
     let salt = bcrypt.genSaltSync(10)
     let hash = bcrypt.hashSync(password, salt)
 
@@ -35,7 +35,6 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body
-
     UserModel.findOne({ email })
     .then(userData => {
         bcrypt.compare(password, userData.password)

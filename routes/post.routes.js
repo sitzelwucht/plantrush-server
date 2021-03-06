@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const bcrypt = require('bcryptjs')
 const PostModel = require('../models/Post.model')
-
-
+const CommentModel = require('../models/Comment.model')
 
 
 router.get('/myposts', (req, res) => {
@@ -21,9 +19,17 @@ router.get('/myposts', (req, res) => {
 
 
 router.post('/create-post', (req, res) => {
-    const { title, content, image } = req.body
 
-    PostModel.create({ title: title, content: content, image: image })
+    const { title, content, imageurl, author } = req.body
+  
+    let newPost = {
+        title, 
+        content,
+        imageurl,
+        author
+    }
+
+    PostModel.create(newPost)
         .then(response => {
             res.status(200).json(response)
         })
@@ -34,6 +40,7 @@ router.post('/create-post', (req, res) => {
             })
         })
 })
+
 
 
 router.get('/myposts/:postId', (req, res) => {
@@ -67,8 +74,8 @@ router.delete('/myposts/:id', (req, res) => {
 
 router.patch('/myposts/:id', (req, res) => {
     let id = req.params.id
-    const { title, description, image } = req.body
-    PostModel.findByIdAndUpdate(id, {$set: {title: title, description: description, image: image}}, {new: true})
+    const { title, content, image } = req.body
+    PostModel.findByIdAndUpdate(id, {$set: {title: title, content: content, image: image}}, {new: true})
     .then(response => {
         res.status(200).json(response)
     })
@@ -80,5 +87,42 @@ router.patch('/myposts/:id', (req, res) => {
     })
 })
 
+
+router.post('/add-comment', (req, res) => {
+
+    const { title, content, author, post } = req.body
+  
+    let newComment = {
+        title, 
+        content,
+        author,
+        post
+    }
+
+    CommentModel.create(newComment)
+        .then(response => {
+            res.status(200).json(response)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'A problem occurred while adding comment',
+                message: err
+            })
+        })
+})
+
+
+router.get('/comments', (req, res) => {
+    CommentModel.find()
+        .then(comments => {
+            res.status(200).json(comments)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'something went wrong when getting comments',
+                message: err
+            })
+        })
+})
 
 module.exports = router

@@ -7,8 +7,6 @@ const app = express();
 
 require('./config')(app);
 
-// let cors = require('cors')
-// app.use(cors())
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;

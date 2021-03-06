@@ -31,8 +31,8 @@ router.get('/all-plants', (req, res) => {
 
 
 router.post('/add-plant', (req, res) => {
-    const { name, watering, light, description, image } = req.body
-    PlantModel.create({ name: name, description: description, watering: watering, light: light, image: image })
+    const { name, watering, light, description, imageurl } = req.body
+    PlantModel.create({ name: name, description: description, watering: watering, light: light, imageurl: imageurl })
         .then(response => {
             res.status(200).json(response)
         })
