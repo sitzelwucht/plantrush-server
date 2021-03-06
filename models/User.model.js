@@ -13,7 +13,7 @@ let UserSchema = new Schema({
     },
     plants: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Plant'
+        ref: 'plant'
     }
 })
 

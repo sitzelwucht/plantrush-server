@@ -9,11 +9,15 @@ let CommentSchema = new Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'user'
     },
     post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'post'
+    },
+    time: {
+        type: Date,
+        default: Date.now
     }
 })
 

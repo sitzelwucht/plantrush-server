@@ -88,6 +88,21 @@ router.patch('/myposts/:id', (req, res) => {
 })
 
 
+router.get('/all-posts', (req, res) => {
+    PostModel.find()
+    .then(posts => {
+        res.status(200).json(posts)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: 'something went wrong when getting posts',
+            message: err
+        })
+    })
+})
+
+
+
 router.post('/add-comment', (req, res) => {
 
     const { title, content, author, post } = req.body
@@ -112,8 +127,9 @@ router.post('/add-comment', (req, res) => {
 })
 
 
-router.get('/comments', (req, res) => {
-    CommentModel.find()
+router.get('/comments/:id', (req, res) => {
+    let postid = req.params.id
+    CommentModel.find({ post: postid })
         .then(comments => {
             res.status(200).json(comments)
         })
