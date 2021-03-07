@@ -1,7 +1,7 @@
 
 const mongoose = require("mongoose");
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/PlantRush";
+const MONGO_URI = process.env.REACT_APP_MONGODB_URI|| "mongodb://localhost/PlantRush";
 
 mongoose
   .connect(MONGO_URI, {
