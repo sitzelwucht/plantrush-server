@@ -6,14 +6,34 @@ const UserModel = require('../models/User.model');
 
 
 router.post('/signup', (req, res) => {
-    const { email, password } = req.body
+    const { email, password, password2 } = req.body
     
+    if (!email || !password || !password2) {
+        res.status(500).json({errorMsg: 'Please fill out all fields'});
+        return;  
+    }
+    if (password !== password2) {
+        res.status(500).json({errorMsg: 'Passwords do not match'})
+    }
+
+    const emailRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
+    if (!emailRegex.test(email)) {
+        res.status(500).json({ errorMsg: 'Email format incorrect'});
+        return;  
+    }
+
+    let pwRegex = /(?=.*\d)(?=.*[a-z]).{6,}/
+    if (!pwRegex.test(password)) {
+      res.status(500).json({errorMsg: 'Password does not meet requirements'});
+      return;  
+    }
+
+
     let salt = bcrypt.genSaltSync(10)
     let hash = bcrypt.hashSync(password, salt)
 
     UserModel.create({email, password: hash})
     .then(user => {
-        user.password = "***"
         res.status(200).json(user)
     })
     .catch(err => {
@@ -45,23 +65,19 @@ router.post('/login', (req, res) => {
                 res.status(200).json(userData)
             }
             else {
-                res.status(500).json({
-                    error: 'Passwords not matching'
+                res.status(500).json({ errorMsg: 'Incorrect password'
                 })
                 return
                 }
             }) 
         .catch(() => {
-            res.status(500).json({
-                error: 'invalid email format'
-                })
+            res.status(500).json({errorMsg: 'Invalid email format'})
             return
         })
     })
     .catch(err => {
         res.status(500).json({
-            error: 'email not registered',
-            message: err
+            errorMsg: 'email not registered',
         })
         return
     })
