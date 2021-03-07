@@ -20,13 +20,14 @@ router.get('/myposts', (req, res) => {
 
 router.post('/create-post', (req, res) => {
 
-    const { title, content, imageurl, author } = req.body
+    const { title, content, imageurl, author, authorName } = req.body
   
     let newPost = {
         title, 
         content,
         imageurl,
-        author
+        author,
+        authorName
     }
 
     PostModel.create(newPost)
@@ -105,12 +106,13 @@ router.get('/all-posts', (req, res) => {
 
 router.post('/add-comment', (req, res) => {
 
-    const { title, content, author, post } = req.body
+    const { title, content, author, post, authorName } = req.body
   
     let newComment = {
         title, 
         content,
         author,
+        authorName,
         post
     }
 

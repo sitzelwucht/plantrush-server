@@ -15,6 +15,7 @@ let PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    authorName: String,
     imageurl: String,
     created: {
         type: Date,

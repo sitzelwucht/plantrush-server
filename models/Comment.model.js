@@ -11,6 +11,7 @@ let CommentSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
+    authorName: String,
     post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'post'

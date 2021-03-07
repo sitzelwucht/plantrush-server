@@ -5,6 +5,7 @@ let PlantSchema = new Schema({
     name: {
         type: String,
     },
+    scientific_name: String,
     watering: {
         type: String,
         enum: ['low', 'medium', 'high']
@@ -18,6 +19,10 @@ let PlantSchema = new Schema({
     added: {
         type: Date,
         default: Date.now
+    },
+    added_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     }
 })
 
