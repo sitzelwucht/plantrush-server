@@ -6,6 +6,7 @@ const axios = require('axios')
 
 
 
+
 router.get('/myplants', (req, res) => {
     PlantModel.find()
         .then(plants => {
@@ -20,6 +21,7 @@ router.get('/myplants', (req, res) => {
 })
 
 
+// fetch plants with search string from ext API
 router.get('/plant-search', (req, res) => {
     let queryStr = req.query.input
     axios.get(`https://trefle.io/api/v1/plants/search?token=${process.env.REACT_APP_TREFLE_API_KEY}&q=${queryStr}`)
@@ -28,6 +30,19 @@ router.get('/plant-search', (req, res) => {
     })
     .catch(err => console.log(err))
 
+})
+
+
+// fetch detailed information about a specific plant
+//TODO finish this
+router.get('/detailed-search/:plant', (req, res) => {
+    let queryStr = req.params.plant
+
+    axios.get(`https://trefle.io/api/v1/species/${queryStr}?token=${process.env.REACT_APP_TREFLE_API_KEY}`)
+    .then(response => {
+        res.status(200).json(response.data)
+    })
+    .catch(err => console.log(err))
 })
 
 
