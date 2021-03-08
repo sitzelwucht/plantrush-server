@@ -14,6 +14,10 @@ let UserSchema = new Schema({
     plants: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'plant'
+    },
+    registered: {
+        type: Date,
+        default: Date.now
     }
 })
 

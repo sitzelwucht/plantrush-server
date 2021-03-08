@@ -20,12 +20,14 @@ router.get('/myplants', (req, res) => {
 })
 
 
-router.get('/all-plants', (req, res) => {
-    axios.get(`https://trefle.io/api/v1/plants?token=${process.env.REACT_APP_TREFLE_API_KEY}`)
+router.get('/plant-search', (req, res) => {
+    let queryStr = req.query.input
+    axios.get(`https://trefle.io/api/v1/plants/search?token=${process.env.REACT_APP_TREFLE_API_KEY}&q=${queryStr}`)
     .then(response => {
         res.status(200).json(response.data)
     })
     .catch(err => console.log(err))
+
 })
 
 

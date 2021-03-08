@@ -129,6 +129,7 @@ router.post('/add-comment', (req, res) => {
 })
 
 
+// get all the comments made on a certain post
 router.get('/comments/:id', (req, res) => {
     let postid = req.params.id
     CommentModel.find({ post: postid })
