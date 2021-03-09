@@ -7,6 +7,8 @@ const app = express();
 
 require('./config')(app);
 
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'public')))
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
@@ -32,6 +34,11 @@ const postRoutes = require('./routes/post.routes');
 app.use('/api', postRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
+
+
+app.use((req, res, next) => {
+  res.sendFile(__dirname + '/public/index.html')
+})
 
 require('./error-handling')(app);
 
