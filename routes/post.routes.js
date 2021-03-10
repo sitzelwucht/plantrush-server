@@ -36,7 +36,7 @@ router.post('/create-post', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: 'A problem occurred while creating post',
+                errorMsg: 'A problem occurred while creating post, please try again',
                 message: err
             })
         })
